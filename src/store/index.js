@@ -1,12 +1,8 @@
 import { createStore } from 'vuex'
+import currencies from './modules/currencies'
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    currencies
   }
 })
