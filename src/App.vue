@@ -2,7 +2,7 @@
   <div id="nav">
     <router-link to="/add">Add currency</router-link>
     <router-link to="/table">Currency table</router-link>
-    <router-link to="/converter">Currency converter</router-link>
+    <router-link to="/convert">Exchange converter</router-link>
   </div>
   <router-view/>
 </template>

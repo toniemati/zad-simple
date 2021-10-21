@@ -1,15 +1,25 @@
 <template>
   <div class="currencyTable">
-    <h1>Available currencies</h1>
+    <h1>Available currencies table</h1>
 
     <table>
       <tr>
         <th>Currency</th>
         <th>Exchange rate</th>
       </tr>
-      <tr v-for="currency in allCurrencies" :key="currency.name">
-        <td>{{ currency.name }}</td>
-        <td>{{ currency.value }}</td>
+
+      <template v-if="filteredCurrencies.length">
+        <tr 
+          v-for="currency in filteredCurrencies" 
+          :key="currency.id"
+        >
+          <td>{{ currency.name }}</td>
+          <td>{{ currency.value }}</td>
+        </tr>
+      </template>
+
+      <tr v-else>
+        <th colspan="2">Fill data in 'add currency' page</th>
       </tr>
     </table>
   </div>
@@ -20,7 +30,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'CurrencyTable',
-  computed: mapGetters(['allCurrencies']),
+  computed: mapGetters(['filteredCurrencies']),
 }
 </script>
 

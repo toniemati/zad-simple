@@ -1,12 +1,26 @@
 <template>
-  <div class="currencyConverter">
-    <h1>Currency converter</h1>
+  <div class="exchangeConverter">
+    <h1>Exchange converter</h1>
 
-    <form @submit.prevent="convert">
-      <input type="number" v-model="value" />
+    <form 
+      @submit.prevent="convert"
+      v-if="filteredCurrencies.length"
+    >
+      <input 
+        type="number" 
+        v-model="value"
+        @input="resetPln"
+      />
 
-      <select v-model="currency">
-        <option v-for="currency in allCurrencies" :key="currency.name" :value="currency">
+      <select 
+        v-model="currency"
+        @input="resetPln"
+      >
+        <option 
+          v-for="currency in filteredCurrencies" 
+          :key="currency.id" 
+          :value="currency"
+        >
           {{ currency.name.toUpperCase() }}
         </option>
       </select>
@@ -14,12 +28,18 @@
       <button type="submit">Convert</button>
     </form>
 
+    <div v-else>
+      <h3>Fill data in 'add currency' page to convert something.</h3>
+    </div>
+
     <div class="output" v-if="pln">
       <div class="outputCurrency">
         <span class="outputValue">{{ value }}</span>
         <span class="outputText">{{ currency.name.toUpperCase() }}</span>
       </div>
+
       <div>=></div>
+      
       <div class="outputCurrency">
         <span class="outputValue">{{ pln }}</span>
         <span class="outputText">PLN</span>
@@ -27,11 +47,13 @@
     </div>
 
     <div v-if="errors.length">
-      <p v-for="error, i in errors" :key="i">
+      <p 
+        v-for="error, idx in errors" 
+        :key="idx"
+      >
         {{ error }}
       </p>
     </div>
-
   </div>
 </template>
 
@@ -39,16 +61,16 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'CurrencyConverter',
+  name: 'ExchangeConverter',
   data: () => {
     return {
       currency: null,
       value: null,
       pln: null,
-      errors: []
+      errors: [],
     }
   },
-  computed: mapGetters(['allCurrencies']),
+  computed: mapGetters(['filteredCurrencies']),
   methods: {
     convert() {
       this.errors = [];
@@ -65,13 +87,16 @@ export default {
       //* setting pln value if no errors
       if (!this.errors.length)
         this.pln = (this.currency.value * this.value).toFixed(2); //* 2 decimal points
+    },
+    resetPln() {
+      this.pln = null;
     }
   }
 }
 </script>
 
 <style scoped>
-.currencyConverter {
+.exchangeConverter {
   display: flex;
   flex-direction: column;
   justify-content: center;

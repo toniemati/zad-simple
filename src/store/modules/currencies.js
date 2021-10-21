@@ -1,29 +1,49 @@
 const state = {
   currencies: [
     {
+      id: 1,
       name: 'usd',
-      value: 3.96
+      value: null
     },
     {
+      id: 2,
       name: 'eur',
-      value: 4.60
+      value: null
     },
     {
+      id: 3,
       name: 'gbp',
-      value: 5.46
+      value: null
     }
   ]
 };
 
 const getters = {
-  allCurrencies: (state) => {
-    return state.currencies
-  }
+  //* return all currencies
+  allCurrencies: (state) =>state.currencies,
+
+  //* return currencies with value
+  filteredCurrencies: (state) => state.currencies.filter((curr) => curr.value),
+
 };
 
-const actions = {};
+const actions = {
+  //* commiting mutation to add currency
+  addCurrency: ({ commit }, currency) => commit('addCurrency', currency),
 
-const mutations = {};
+};
+
+const mutations = {
+  //* adding currency
+  addCurrency: (state, currency) => {
+    state.currencies = state.currencies.map((curr) => {
+      if (curr.name === currency.name)
+        curr.value = currency.value;
+
+      return curr;
+    })
+  }
+};
 
 export default {
   state,
