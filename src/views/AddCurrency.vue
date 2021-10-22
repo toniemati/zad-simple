@@ -3,19 +3,30 @@
     <h1>Adding new currency</h1>
 
     <form @submit.prevent="formSubmitted">
-      <select v-model="currency">
-        <option 
-          v-for="currency in allCurrencies" 
-          :key="currency.id" 
-          :value="currency.name"
+      <div class="formInputs">
+        <select 
+          v-model="currency"
+          placeholder="currency..."
         >
-          {{ currency.name.toUpperCase() }}
-        </option>
-      </select>
+          <option disabled value="default">Select currency</option>
+          <option 
+            v-for="currency in allCurrencies" 
+            :key="currency.id" 
+            :value="currency.name"
+          >
+            {{ currency.name.toUpperCase() }}
+          </option>
+        </select>
 
-      <input type="number" v-model="value" />
+        <input 
+          type="number" 
+          v-model="value" 
+          placeholder="Value (eg. 9,99)"
+          step="0.01"
+        />
+      </div>
 
-      <button type="submit">submit</button>
+      <button type="submit">Submit</button>
     </form>
 
     <div v-if="message">
@@ -41,7 +52,7 @@ export default {
   computed: mapGetters(['allCurrencies']),
   data: () => {
     return {
-      currency: null,
+      currency: 'default',
       value: null,
       errors: [],
       message: null
@@ -54,7 +65,7 @@ export default {
       this.message = null;
 
       //* if no currency push error
-      if (!this.currency)
+      if (this.currency === 'default' || !this.currency)
         this.errors.push('Currency is required.');
       
       //* if no value push error
@@ -71,7 +82,7 @@ export default {
         this.addCurrency(currency);
         this.message = 'Successfully added new currency.';
 
-        this.currency = null;
+        this.currency = 'default';
         this.value = null;
       }
     }
@@ -95,6 +106,52 @@ h1 {
   text-align: center;
   font-size: 3rem;
   color: #3fb984;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px 2px lightslategray;
+}
+
+.formInputs {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+
+select,
+input {
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  width: 50%;
+  border: none;
+  border-bottom: 1px solid #31475E;
+  border-radius: 0;
+  background: none;
+  overflow: hidden;
+}
+
+button {
+  padding: 1rem 2rem;
+  border: none;
+  background-color: #31475E;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #597ea7;
 }
 
 p {
