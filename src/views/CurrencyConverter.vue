@@ -181,7 +181,7 @@ p {
   gap: 0.5rem;
 }
 
-.currencyConverter__output {
+.currencyConveter__output {
   display: flex;
   flex-direction: row;
   justify-content: center;
