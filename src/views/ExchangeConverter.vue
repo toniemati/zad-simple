@@ -6,53 +6,58 @@
       @submit.prevent="convert"
       v-if="filteredCurrencies.length"
     >
-      <input 
-        type="number" 
-        v-model="value"
-        @input="resetPln"
-      />
-
-      <select 
-        v-model="currency"
-        @input="resetPln"
-      >
-        <option 
-          v-for="currency in filteredCurrencies" 
-          :key="currency.id" 
-          :value="currency"
+      <div class="formInputs">
+        <select 
+          v-model="currency"
+          @input="resetPln"
         >
-          {{ currency.name.toUpperCase() }}
-        </option>
-      </select>
+          <option disabled value="default">Select currency</option>
+          <option 
+            v-for="currency in filteredCurrencies" 
+            :key="currency.id" 
+            :value="currency"
+          >
+            {{ currency.name.toUpperCase() }}
+          </option>
+        </select>
+
+        <input 
+          type="number" 
+          v-model="value"
+          placeholder="Value (eg. 9,99)"
+          step="0.01"
+          @input="resetPln"
+        />
+      </div>
+
+      <div class="output" v-if="pln">
+        <div class="outputCurrency">
+          <span class="outputValue">{{ value }}</span>
+          <span class="outputText">{{ currency.name.toUpperCase() }}</span>
+        </div>
+
+        <div>=></div>
+        
+        <div class="outputCurrency">
+          <span class="outputValue">{{ pln }}</span>
+          <span class="outputText">PLN</span>
+        </div>
+      </div>
+
+      <div class="exchangeConverterInfo" v-if="errors.length">
+        <p 
+          v-for="error, idx in errors" 
+          :key="idx"
+        >
+          {{ error }}
+        </p>
+      </div>
 
       <button type="submit">Convert</button>
     </form>
 
-    <div v-else>
+    <div class="exchangeConverterInfo" v-else>
       <h3>Fill data in 'add currency' page to convert something.</h3>
-    </div>
-
-    <div class="output" v-if="pln">
-      <div class="outputCurrency">
-        <span class="outputValue">{{ value }}</span>
-        <span class="outputText">{{ currency.name.toUpperCase() }}</span>
-      </div>
-
-      <div>=></div>
-      
-      <div class="outputCurrency">
-        <span class="outputValue">{{ pln }}</span>
-        <span class="outputText">PLN</span>
-      </div>
-    </div>
-
-    <div v-if="errors.length">
-      <p 
-        v-for="error, idx in errors" 
-        :key="idx"
-      >
-        {{ error }}
-      </p>
     </div>
   </div>
 </template>
@@ -64,7 +69,7 @@ export default {
   name: 'ExchangeConverter',
   data: () => {
     return {
-      currency: null,
+      currency: 'default',
       value: null,
       pln: null,
       errors: [],
@@ -113,6 +118,57 @@ h1 {
   color: #3fb984;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px 2px lightslategray;
+}
+
+.formInputs {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+
+select,
+input {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  text-align: center;
+  width: 50%;
+  border: none;
+  border-bottom: 1px solid #31475E;
+  border-radius: 0;
+  background: none;
+  overflow: hidden;
+}
+
+.exchangeConverterInfo {
+  text-align: center;
+}
+
+button {
+  padding: 1rem 2rem;
+  border: none;
+  background-color: #31475E;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #597ea7;
+}
+
 p {
   font-size: 0.9rem;
   color: red;
@@ -128,6 +184,8 @@ p {
 .output {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
 
   font-size: 2rem;

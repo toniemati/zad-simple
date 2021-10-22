@@ -6,7 +6,6 @@
       <div class="formInputs">
         <select 
           v-model="currency"
-          placeholder="currency..."
         >
           <option disabled value="default">Select currency</option>
           <option 
@@ -26,21 +25,23 @@
         />
       </div>
 
+      <div v-if="message || errors.length" class="addCurrencyInfo">
+        <div v-if="message">
+          <p class="message">{{ message }}</p>
+        </div>
+
+        <div v-if="errors.length">
+          <p 
+            v-for="error, idx in errors" 
+            :key="idx"
+          >
+            {{ error }}
+          </p>
+        </div>
+      </div>
+
       <button type="submit">Submit</button>
     </form>
-
-    <div v-if="message">
-      <p class="message">{{ message }}</p>
-    </div>
-
-    <div v-if="errors.length">
-      <p 
-        v-for="error, idx in errors" 
-        :key="idx"
-      >
-        {{ error }}
-      </p>
-    </div>
   </div>
 </template>
 
@@ -128,6 +129,7 @@ form {
 select,
 input {
   padding: 0.5rem 0.75rem;
+  font-size: 1rem;
   text-align: center;
   width: 50%;
   border: none;
@@ -135,6 +137,10 @@ input {
   border-radius: 0;
   background: none;
   overflow: hidden;
+}
+
+.addCurrencyInfo {
+  text-align: center;
 }
 
 button {
