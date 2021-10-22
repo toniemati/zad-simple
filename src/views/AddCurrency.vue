@@ -3,7 +3,7 @@
     <h1>Adding new currency</h1>
 
     <form @submit.prevent="formSubmitted">
-      <div class="formInputs">
+      <div class="addCurrency__formInputs">
         <select 
           v-model="currency"
         >
@@ -25,9 +25,9 @@
         />
       </div>
 
-      <div v-if="message || errors.length" class="addCurrencyInfo">
+      <div v-if="message || errors.length" class="addCurrency__infoBox">
         <div v-if="message">
-          <p class="message">{{ message }}</p>
+          <p class="addCurrency__message">{{ message }}</p>
         </div>
 
         <div v-if="errors.length">
@@ -120,7 +120,7 @@ form {
   box-shadow: 0 0 20px 2px lightslategray;
 }
 
-.formInputs {
+.addCurrency__formInputs {
   display: flex;
   gap: 2rem;
   width: 100%;
@@ -139,7 +139,7 @@ input {
   overflow: hidden;
 }
 
-.addCurrencyInfo {
+.addCurrency__infoBox {
   text-align: center;
 }
 
@@ -166,7 +166,7 @@ p {
   font-weight: bold;
 }
 
-p.message {
+p.addCurrency__message {
   color: green;
 }
 </style>

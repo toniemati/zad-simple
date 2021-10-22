@@ -6,7 +6,7 @@
       @submit.prevent="convert"
       v-if="filteredCurrencies.length"
     >
-      <div class="formInputs">
+      <div class="currencyConveter__formInputs">
         <select 
           v-model="currency"
           @input="resetPln"
@@ -30,21 +30,21 @@
         />
       </div>
 
-      <div class="output" v-if="pln">
-        <div class="outputCurrency">
-          <span class="outputValue">{{ value }}</span>
-          <span class="outputText">{{ currency.name.toUpperCase() }}</span>
+      <div class="currencyConveter__output" v-if="pln">
+        <div class="currencyConveter__output--currency">
+          <span class="currencyConveter__output--value">{{ value }}</span>
+          <span class="currencyConveter__output--text">{{ currency.name.toUpperCase() }}</span>
         </div>
 
         <div>=></div>
         
-        <div class="outputCurrency">
-          <span class="outputValue">{{ pln }}</span>
-          <span class="outputText">PLN</span>
+        <div class="currencyConveter__output--currency">
+          <span class="currencyConveter__output--value">{{ pln }}</span>
+          <span class="currencyConveter__output--text">PLN</span>
         </div>
       </div>
 
-      <div class="currencyConverterInfo" v-if="errors.length">
+      <div class="currencyConverter__info" v-if="errors.length">
         <p 
           v-for="error, idx in errors" 
           :key="idx"
@@ -56,7 +56,7 @@
       <button type="submit">Convert</button>
     </form>
 
-    <div class="currencyConverterInfo" v-else>
+    <div class="currencyConverter__info" v-else>
       <h3>Fill data in 'add currency' page to convert something.</h3>
     </div>
   </div>
@@ -129,7 +129,7 @@ form {
   box-shadow: 0 0 20px 2px lightslategray;
 }
 
-.formInputs {
+.currencyConveter__formInputs {
   display: flex;
   gap: 2rem;
   width: 100%;
@@ -148,7 +148,7 @@ input {
   overflow: hidden;
 }
 
-.currencyConverterInfo {
+.currencyConverter__info {
   text-align: center;
 }
 
@@ -175,13 +175,13 @@ p {
   font-weight: bold;
 }
 
-.outputCurrency {
+.currencyConveter__output--currency {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
 }
 
-.output {
+.currencyConverter__output {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -192,11 +192,11 @@ p {
   font-weight: bold;
 }
 
-.outputValue {
+.currencyConveter__output--value {
   color: #31475E;
 }
 
-.outputText {
+.currencyConveter__output--text {
   color: #3fb984;
 }
 
