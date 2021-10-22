@@ -1,17 +1,17 @@
 const state = {
   currencies: [
     {
-      id: 1,
+      id: '11',
       name: 'usd',
       value: null
     },
     {
-      id: 2,
+      id: '22',
       name: 'eur',
       value: null
     },
     {
-      id: 3,
+      id: '33',
       name: 'gbp',
       value: null
     }
@@ -25,6 +25,9 @@ const getters = {
   //* return currencies with value
   filteredCurrencies: (state) => state.currencies.filter((curr) => curr.value),
 
+  //* return currencies
+  emptyCurrencies: (state) => state.currencies.filter((curr) => !curr.value),
+
 };
 
 const actions = {
@@ -35,13 +38,23 @@ const actions = {
 
 const mutations = {
   //* adding currency
-  addCurrency: (state, currency) => {
-    state.currencies = state.currencies.map((curr) => {
-      if (curr.name === currency.name)
-        curr.value = currency.value;
+  // addCurrency: (state, currency) => {
+  //   state.currencies = state.currencies.map((curr) => {
+  //     if (curr.name === currency.name)
+  //       curr.value = currency.value;
 
-      return curr;
-    })
+  //     return curr;
+  //   })
+  // },
+
+  //* Normally I would ask but now I made 2 functions, first changing values, second pushing
+  //* just uncomment first and comment second
+
+  addCurrency: (state, currency) => {
+    //* kinda random id during production
+    const id = '_' + Math.random().toString(32).substr(2, 9);
+    state.currencies.push({ ...currency, id });
+    console.log(state.currencies);
   }
 };
 

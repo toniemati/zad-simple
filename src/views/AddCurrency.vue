@@ -9,7 +9,7 @@
         >
           <option disabled value="default">Select currency</option>
           <option 
-            v-for="currency in allCurrencies" 
+            v-for="currency in emptyCurrencies" 
             :key="currency.id" 
             :value="currency.name"
           >
@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <button type="submit">Submit</button>
+      <button type="submit">Add</button>
     </form>
   </div>
 </template>
@@ -50,7 +50,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'AddCurrency',
-  computed: mapGetters(['allCurrencies']),
+  computed: mapGetters(['emptyCurrencies']),
   data: () => {
     return {
       currency: 'default',

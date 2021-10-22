@@ -1,6 +1,6 @@
 <template>
-  <div class="exchangeConverter">
-    <h1>Exchange converter</h1>
+  <div class="currencyConverter">
+    <h1>Currency converter</h1>
 
     <form 
       @submit.prevent="convert"
@@ -17,7 +17,7 @@
             :key="currency.id" 
             :value="currency"
           >
-            {{ currency.name.toUpperCase() }}
+            {{ currency.name.toUpperCase() }} ({{ currency.value }})
           </option>
         </select>
 
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="exchangeConverterInfo" v-if="errors.length">
+      <div class="currencyConverterInfo" v-if="errors.length">
         <p 
           v-for="error, idx in errors" 
           :key="idx"
@@ -56,7 +56,7 @@
       <button type="submit">Convert</button>
     </form>
 
-    <div class="exchangeConverterInfo" v-else>
+    <div class="currencyConverterInfo" v-else>
       <h3>Fill data in 'add currency' page to convert something.</h3>
     </div>
   </div>
@@ -66,7 +66,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'ExchangeConverter',
+  name: 'CurrencyConverter',
   data: () => {
     return {
       currency: 'default',
@@ -101,7 +101,7 @@ export default {
 </script>
 
 <style scoped>
-.exchangeConverter {
+.currencyConverter {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -148,7 +148,7 @@ input {
   overflow: hidden;
 }
 
-.exchangeConverterInfo {
+.currencyConverterInfo {
   text-align: center;
 }
 

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AddCurrency from '../views/AddCurrency.vue';
 import CurrencyTable from '../views/CurrencyTable.vue';
-import ExchangeConverter from '../views/ExchangeConverter.vue';
+import CurrencyConverter from '../views/CurrencyConverter.vue';
 
 const routes = [
   {
@@ -20,8 +20,8 @@ const routes = [
   },
   {
     path: '/convert',
-    name: 'ExchangeConverter',
-    component: ExchangeConverter
+    name: 'CurrencyConverter',
+    component: CurrencyConverter
   },
   {
     path: '/:pathMatch(.*)*',
