@@ -119,6 +119,8 @@ h1 {
 }
 
 form {
+  width: 95vw;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -184,6 +186,7 @@ p {
 .currencyConveter__output {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 1rem;

@@ -110,6 +110,8 @@ h1 {
 }
 
 form {
+  width: 95vw;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 2rem;

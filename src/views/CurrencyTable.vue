@@ -53,6 +53,8 @@ h1 {
 }
 
 table {
+  width: 95vw;
+  max-width: 500px;
   border-collapse: collapse;
   box-shadow: 0 0 20px 2px lightslategray;
 
